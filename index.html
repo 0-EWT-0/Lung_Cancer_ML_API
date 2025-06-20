@@ -1,47 +1,162 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="index.css">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <title>Predicción de Conflictos en Redes</title>
 </head>
+
 <body>
-  <h1>Predicción: Adicción a redes sociales vs. Conflictos</h1>
+  <header class="bg-blue-700 shadow-lg">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <!-- Logo -->
+        <div class="flex-shrink-0">
+          <a href="index.html">
+            <img class="h-10 w-auto" src="imgs/logoia.png" alt="Hospital Logo">
+          </a>
+        </div>
 
-  <form id="predictForm">
-    <label for="addicted_score">Nivel de adicción (0-10):</label>
-    <input type="number" id="addicted_score" name="addicted_score" step="1" min="0" max="10" required>
-    <button type="submit">Predecir</button>
-  </form>
+        <!-- Navigation Options -->
+        <div class="hidden md:flex space-x-6">
+          <a href="#"
+            class="text-white hover:bg-blue-800 hover:text-white px-3 py-2 rounded-lg font-medium transition duration-300">Aislamiento</a>
+          <a href="#"
+            class="text-white hover:bg-blue-800 hover:text-white px-3 py-2 rounded-lg font-medium transition duration-300">Bajo
+            rendimiento</a>
+          <a href="#"
+            class="text-white hover:bg-blue-800 hover:text-white px-3 py-2 rounded-lg font-medium transition duration-300">Mal
+            sueño</a>
+          <a href="logical1.html"
+            class="text-white hover:bg-blue-800 hover:text-white px-3 py-2 rounded-lg font-medium transition duration-300">Conflictos</a>
+          <a href="#"
+            class="text-white hover:bg-blue-800 hover:text-white px-3 py-2 rounded-lg font-medium transition duration-300">Salud
+            mental</a>
+          <a href="#"
+            class="text-white hover:bg-blue-800 hover:text-white px-3 py-2 rounded-lg font-medium transition duration-300">Contacto</a>
+        </div>
 
-  <h2>Resultado:</h2>
-  <p id="result"></p>
+        <!-- Hamburger Menu for Mobile -->
+        <div class="md:hidden">
+          <button id="menu-button" class="text-white hover:text-blue-200 focus:outline-none">
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
 
-  <h2>Gráfica:</h2>
-  <img id="graph" src="" alt="Gráfica generada" style="max-width: 600px; display: none;">
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="hidden md:hidden bg-blue-600">
+        <div class="px-2 pt-2 pb-3 space-y-1">
+          <a href="#"
+            class="block text-white hover:bg-blue-800 hover:text-white px-3 py-2 rounded-lg font-medium">Aislamiento</a>
+          <a href="#" class="block text-white hover:bg-blue-800 hover:text-white px-3 py-2 rounded-lg font-medium">Bajo
+            rendimiento</a>
+          <a href="#" class="block text-white hover:bg-blue-800 hover:text-white px-3 py-2 rounded-lg font-medium">Mal
+            sueño</a>
+          <a href="#"
+            class="block text-white hover:bg-blue-800 hover:text-white px-3 py-2 rounded-lg font-medium">Conflictos</a>
+          <a href="#" class="block text-white hover:bg-blue-800 hover:text-white px-3 py-2 rounded-lg font-medium">Salud
+            mental</a>
+          <a href="#"
+            class="block text-white hover:bg-blue-800 hover:text-white px-3 py-2 rounded-lg font-medium">Contacto</a>
+        </div>
+      </div>
+    </nav>
+  </header>
 
-  <script>
-    const form = document.getElementById("predictForm");
-    const resultEl = document.getElementById("result");
-    const graphImg = document.getElementById("graph");
+  <div class="relative h-screen bg-cover bg-center" style="background-image: url('imgs/banner.jpg')">
+    <div class="absolute inset-0 flex flex flex-col items-center justify-center text-center">
+      <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">¿Estás Sobrellevando Tu Adicción a Redes Sociales?</h1>
+      <p class="text-lg md:text-xl max-w-2xl text-white mb-6">Descubre cómo tu comportamiento en redes sociales afecta
+        tu bienestar mental.</p>
+      <button onclick="document.getElementById('List').scrollIntoView({ behavior: 'smooth' })"
+        class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300">
+        Comenzar ahora
+      </button>
+    </div>
+  </div>
 
-    form.addEventListener("submit", async (event) => {
-      event.preventDefault();
-      const addicted_score = parseFloat(document.getElementById("addicted_score").value);
 
-      const response = await fetch("http://127.0.0.1:5000/predict/social_media_addiction_conflicts", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ addicted_score })
+  <div id="List" class="container mx-auto px-4 py-12">
+    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">Evalúa tu relación con las redes sociales</h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Card 1 -->
+      <a href="logical1.html">
+        <div
+          class="relative bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 border-4 border-transparent hover:border-blue-500">
+          <img src="imgs/card1.jpg" alt="Medical professional" class="w-full h-48 object-cover">
+          <div class="p-4 text-center">
+            <p class="text-lg font-semibold text-gray-800">¿Las redes sociales te aíslan?</p>
+          </div>
+        </div>
+      </a>
+      <!-- Card 2 -->
+      <div
+        class="relative bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 border-4 border-transparent hover:border-blue-500">
+        <img src="imgs/card2.jpg" alt="Medical equipment" class="w-full h-48 object-cover">
+        <div class="p-4 text-center">
+          <p class="text-lg font-semibold text-gray-800">¿Tener pareja baja tus calificaciones?</p>
+        </div>
+      </div>
+      <!-- Card 3 -->
+      <div
+        class="relative bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 border-4 border-transparent hover:border-blue-500">
+        <img src="imgs/card3.jpg" alt="Doctor consultation" class="w-full h-48 object-cover">
+        <div class="p-4 text-center">
+          <p class="text-lg font-semibold text-gray-800">¿Una mala relación te quita el sueño?</p>
+        </div>
+      </div>
+      <!-- Card 4 -->
+      <a href="logical1.html">
+        <div
+          class="relative bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 border-4 border-transparent hover:border-blue-500">
+          <img src="imgs/card4.jpg" alt="Medical checkup" class="w-full h-48 object-cover">
+          <div class="p-4 text-center">
+            <p class="text-lg font-semibold text-gray-800">¿Entre más usas redes, más problemas tienes?</p>
+          </div>
+        </div>
+      </a>
+      <!-- Card 5 -->
+      <div
+        class="relative bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 border-4 border-transparent hover:border-blue-500">
+        <img src="imgs/card5.jpg" alt="Hospital room" class="w-full h-48 object-cover">
+        <div class="p-4 text-center">
+          <p class="text-lg font-semibold text-gray-800">¿Las redes sociales te roban el sueño y la salud mental?</p>
+        </div>
+      </div>
+      <!-- Card 6 -->
+      <div
+        class="relative bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 border-4 border-transparent hover:border-blue-500">
+        <img
+          src="https://images.unsplash.com/photo-1576091160550-2173fdabea2e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+          alt="Medical team" class="w-full h-48 object-cover">
+        <div class="p-4 text-center">
+          <p class="text-lg font-semibold text-gray-800">¿Quiénes son los Mal sueño?</p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const menuButton = document.getElementById('menu-button');
+      const mobileMenu = document.getElementById('mobile-menu');
+
+      menuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
       });
-
-      const data = await response.json();
-      resultEl.textContent = `Predicción: ${data.addicted_score} conflictos`;
-
-      if (data.plot_base64) {
-        graphImg.src = `data:image/png;base64,${data.plot_base64}`;
-        graphImg.style.display = "block";
-      }
-    });
-  </script>
+    </script>
 </body>
+
 </html>
