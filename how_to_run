@@ -1,0 +1,7 @@
+Navegar a la carpeta y poner este comando: 
+
+.venv\Scripts\activate
+
+Luego correr la api con 
+
+python app.py
