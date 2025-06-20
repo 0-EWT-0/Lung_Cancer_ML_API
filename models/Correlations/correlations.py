@@ -19,3 +19,22 @@ def daily_usage_addiction_conflicts_sleep_correlation():
     return {
         "plot": image_base64
     }
+    
+def general_correlation_matrix():
+    
+    correlation_matrix = df.corr(numeric_only=True)
+    
+    plt.figure(figsize=(10, 6))
+    sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt=".2f")
+    plt.title('Mapa de Calor de Correlación entre Variables')
+    #plt.show()
+    
+    buffer = BytesIO()
+    plt.savefig(buffer, format='png')
+    buffer.seek(0)
+    image_base64 = base64.b64encode(buffer.read()).decode('utf-8')
+    plt.close()
+
+    return {
+        "plot": image_base64
+    }

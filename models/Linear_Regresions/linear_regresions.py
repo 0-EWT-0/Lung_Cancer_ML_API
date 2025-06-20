@@ -71,7 +71,7 @@ def slepp_hours_affect_mental_health (sleep_hours: float, mental_health_score: f
     ax.view_init(elev=20, azim=135)
 
     plt.tight_layout()
-    plt.show()
+    #plt.show()
 
     
     buffer = BytesIO()
@@ -105,7 +105,7 @@ def less_sleep_more_social_media(media_hours: float):
     plt.ylabel('Horas de sueño por noche')
     plt.legend("Prediccion:" + str(int(pred[0])))
     plt.title('Relación entre uso de redes y sueño')
-    plt.show();
+    #plt.show();
     
     buffer = BytesIO()
     plt.savefig(buffer, format='png')

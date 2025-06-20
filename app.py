@@ -6,6 +6,8 @@ from controllers.linear_controller import linear_bp
 from controllers.tree_controller import tree_bp
 from controllers.cluster_controller import cluster_bp
 from controllers.correlation_controler import correlation_bp
+from controllers.boxplot_controller import boxplot_bp
+from controllers.histogram_controller import histogram_bp
 
 app = Flask(__name__)
 CORS(app)
@@ -15,6 +17,8 @@ app.register_blueprint(linear_bp)
 app.register_blueprint(tree_bp)
 app.register_blueprint(cluster_bp)
 app.register_blueprint(correlation_bp)
+app.register_blueprint(boxplot_bp)
+app.register_blueprint(histogram_bp)
 
 @app.route('/')
 def home():

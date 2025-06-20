@@ -25,7 +25,7 @@ def student_sleeps_enough():
     plt.figure(figsize=(25,10))
     plot_tree(modelo, feature_names=["Horas en redes"], class_names=["Duerme mal", "Duerme bien"], filled=True)
     plt.title("Árbol de decisión: ¿Duerme bien según uso de redes?")
-    plt.show()
+    #plt.show()
     
     buffer = BytesIO()
     plt.savefig(buffer, format='png')
@@ -55,7 +55,7 @@ def social_media_impact_academics():
     plot_tree(modelo, feature_names=["Horas en redes"],
     class_names=["Sin impacto", "Con impacto"], filled=True)
     plt.title("¿El uso de redes sociales afecta el rendimiento académico?")
-    plt.show()
+    #plt.show()
     
     buffer = BytesIO()
     plt.savefig(buffer, format='png')
@@ -89,7 +89,7 @@ def social_media_impact_academics():
 #             class_names=["Pocas horas", "Muchas horas"],
 #             filled=True)
 #     plt.title("¿El estado sentimental influye en el uso de redes sociales?")
-#     plt.show()
+#     #plt.show()
     
 #     buffer = BytesIO()
 #     plt.savefig(buffer, format='png')

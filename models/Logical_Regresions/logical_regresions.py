@@ -22,7 +22,7 @@ def single_more_hours_social_media(hours: float):
     plt.ylabel("Es soltero?")
     plt.legend()
     plt.title("Mas horas en redes implica mayor probabilidad de estar soltero?")
-    plt.show()
+    #plt.show()
     
     buffer = BytesIO()
     plt.savefig(buffer, format='png')
@@ -54,7 +54,7 @@ def relations_affect_academy_preformance (is_in_relationship: bool):
     plt.ylabel("Esta en una relacion?")
     plt.legend()
     plt.title("Estar en una relacion implica menor rendimiento academico?")
-    plt.show()
+    #plt.show()
     
     buffer = BytesIO()
     plt.savefig(buffer, format='png')
@@ -86,7 +86,7 @@ def less_sleep_in_complicated_relationship(sleep_hours: float):
     plt.ylabel("Esta en una relacion complicada?")
     plt.legend()
     plt.title("Estar en una relacion complicada implica menor rendimiento academico?")
-    plt.show()
+    #plt.show()
     
     buffer = BytesIO()
     plt.savefig(buffer, format='png')

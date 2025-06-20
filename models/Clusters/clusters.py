@@ -34,7 +34,7 @@ def daily_hours_addicted_age_relation ():
     ax.view_init(elev=20, azim=135)
 
     plt.tight_layout()
-    plt.show()
+    #plt.show()
     
     buffer = BytesIO()
     plt.savefig(buffer, format='png')
