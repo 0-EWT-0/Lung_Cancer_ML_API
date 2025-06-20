@@ -10,7 +10,7 @@ def predict_mental_health():
     mental_health_score = float(data.get("mental_health_score"))
     result = slepp_hours_affect_mental_health(sleep_hours, mental_health_score)
     return jsonify({
-        "addicted_score": result["prediction"],
+        "prediction": result["prediction"],
         "plot_base64": result["plot"]
     })
 
@@ -20,7 +20,7 @@ def predict_social_media_addiction_conflicts():
     addicted_score = float(data.get("addicted_score"))
     result = social_media_addiction_conflicts(addicted_score)
     return jsonify({
-        "addicted_score": result["prediction"],
+        "prediction": result["prediction"],
         "plot_base64": result["plot"]
     })
 
@@ -30,6 +30,6 @@ def predict_less_sleep_more_social_media():
     media_hours = float(data.get("media_hours"))
     result = less_sleep_more_social_media(media_hours)
     return jsonify({
-        "addicted_score": result["prediction"],
+        "prediction": result["prediction"],
         "plot_base64": result["plot"]
     })

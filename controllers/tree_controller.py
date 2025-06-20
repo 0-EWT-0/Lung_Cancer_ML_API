@@ -7,7 +7,7 @@ tree_bp = Blueprint('tree_bp', __name__)
 def predict_student_sleeps_enough():
     result = student_sleeps_enough()
     return jsonify({
-        "addicted_score": result["prediction"],
+        "prediction": result["prediction"],
         "plot_base64": result["plot"]
     })
     
@@ -15,6 +15,14 @@ def predict_student_sleeps_enough():
 def predict_social_media_impact_academics():
     result = social_media_impact_academics()
     return jsonify({
-        "addicted_score": result["prediction"],
+        "prediction": result["prediction"],
         "plot_base64": result["plot"]
     })
+    
+# @tree_bp.route('/predict/social_media_usage_by_relationship_status', methods=['GET'])
+# def predict_social_media_usage_by_relationship_status():
+#     result = social_media_usage_by_relationship_status()
+#     return jsonify({
+#         "prediction": result["prediction"],
+#         "plot_base64": result["plot"]
+#     })

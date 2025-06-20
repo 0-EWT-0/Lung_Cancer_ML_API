@@ -10,7 +10,7 @@ def predict_single_status():
     hours = float(data.get("hours"))
     result = single_more_hours_social_media(hours)
     return jsonify({
-        "addicted_score": result["prediction"],
+        "prediction": result["prediction"],
         "plot_base64": result["plot"]
     })
 
@@ -20,7 +20,7 @@ def predict_academic_impact():
     is_in_relationship = bool(data.get("is_in_relationship"))
     result = relations_affect_academy_preformance(is_in_relationship)
     return jsonify({
-        "addicted_score": result["prediction"],
+        "prediction": result["prediction"],
         "plot_base64": result["plot"]
     })
 
@@ -30,6 +30,6 @@ def predict_less_sleep_relation():
     sleep_hours = int(data.get("sleep_hours"))
     result = less_sleep_in_complicated_relationship(sleep_hours)
     return jsonify({
-        "addicted_score": result["prediction"],
+        "prediction": result["prediction"],
         "plot_base64": result["plot"]
     })

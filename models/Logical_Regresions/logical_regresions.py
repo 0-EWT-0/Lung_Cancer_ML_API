@@ -98,3 +98,4 @@ def less_sleep_in_complicated_relationship(sleep_hours: float):
         "prediction": int(pred[0]),
         "plot": image_base64
     }
+
