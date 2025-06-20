@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Predicción de Salud Mental</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    form { margin-bottom: 20px; }
+    label { display: inline-block; width: 200px; }
+    input, button { margin: 5px; }
+    img { max-width: 600px; }
+  </style>
+</head>
+<body>
+  <h1>Predicción: Horas de Sueño vs. Salud Mental</h1>
+
+  <form id="mentalHealthForm">
+    <label for="sleep_hours">Horas de sueño diarias:</label>
+    <input type="number" id="sleep_hours" name="sleep_hours" step="0.1" min="0" max="24" required>
+    <br>
+    <label for="mental_health_score">Puntuación de salud mental (0-10):</label>
+    <input type="number" id="mental_health_score" name="mental_health_score" step="0.1" min="0" max="10" required>
+    <br>
+    <button type="submit">Predecir Salud Mental</button>
+  </form>
+
+  <h2>Resultado:</h2>
+  <p id="mentalHealthResult"></p>
+
+  <h2>Gráfica:</h2>
+  <img id="mentalHealthGraph" src="" alt="Gráfica de Salud Mental" style="display: none;">
+
+  <script>
+    const mentalHealthForm = document.getElementById("mentalHealthForm");
+    const mentalHealthResult = document.getElementById("mentalHealthResult");
+    const mentalHealthGraph = document.getElementById("mentalHealthGraph");
+
+    mentalHealthForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const sleep_hours = parseFloat(document.getElementById("sleep_hours").value);
+      const mental_health_score = parseFloat(document.getElementById("mental_health_score").value);
+
+      const response = await fetch("http://127.0.0.1:5000/predict/Avg_Daily_Usage_Hours", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ sleep_hours, mental_health_score })
+      });
+
+      const data = await response.json();
+      mentalHealthResult.textContent = `Predicción: ${data.addicted_score} impacto en salud mental`;
+
+      if (data.plot_base64) {
+        mentalHealthGraph.src = `data:image/png;base64,${data.plot_base64}`;
+        mentalHealthGraph.style.display = "block";
+      }
+    });
+  </script>
+</body>
+</html>
