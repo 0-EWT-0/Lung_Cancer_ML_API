@@ -104,8 +104,8 @@ def less_sleep_more_social_media(media_hours: float):
     plt.xlabel('Horas de uso diario de redes sociales')
     plt.ylabel('Horas de sueño por noche')
     plt.legend("Prediccion:" + str(int(pred[0])))
-    plt.title('Relación entre uso de redes y sueño')
-    plt.show();
+    plt.title('Relación entre uso de redes y sueño');
+    ##plt.show();
     
     buffer = BytesIO()
     plt.savefig(buffer, format='png')

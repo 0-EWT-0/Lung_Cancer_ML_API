@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Predicción: Menos Sueño por Uso de Redes Sociales</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    form { margin-bottom: 20px; }
+    label { display: inline-block; width: 200px; }
+    input, button { margin: 5px; }
+    img { max-width: 600px; }
+  </style>
+</head>
+<body>
+  <h1>Predicción: Menos Sueño por Uso de Redes Sociales</h1>
+
+  <form id="socialMediaSleepForm">
+    <label for="media_hours">Horas diarias en redes sociales:</label>
+    <input type="number" id="media_hours" name="media_hours" step="0.1" min="0" max="24" required>
+    <br>
+    <button type="submit">Predecir Impacto</button>
+  </form>
+
+  <h2>Resultado:</h2>
+  <p id="socialMediaSleepResult"></p>
+
+  <h2>Gráfica:</h2>
+  <img id="socialMediaSleepGraph" src="" alt="Gráfica de Impacto en Sueño" style="display: none;">
+
+  <script>
+    const socialMediaSleepForm = document.getElementById("socialMediaSleepForm");
+    const socialMediaSleepResult = document.getElementById("socialMediaSleepResult");
+    const socialMediaSleepGraph = document.getElementById("socialMediaSleepGraph");
+
+    socialMediaSleepForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const media_hours = parseFloat(document.getElementById("media_hours").value);
+
+      const response = await fetch("http://127.0.0.1:5000/predict/less_sleep_more_social_media", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ media_hours })
+      });
+
+      const data = await response.json();
+      socialMediaSleepResult.textContent = `Predicción: ${data.addicted_score} impacto en sueño`;
+
+      if (data.plot_base64) {
+        socialMediaSleepGraph.src = `data:image/png;base64,${data.plot_base64}`;
+        socialMediaSleepGraph.style.display = "block";
+      } else {
+        socialMediaSleepResult.textContent += " (No se recibió gráfica)";
+      }
+    });
+  </script>
+</body>
+</html>
