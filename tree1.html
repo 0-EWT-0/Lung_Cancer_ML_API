@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Árbol de Decisión: Sueño y Uso de Redes</title>
+</head>
+<body>
+  <h1>¿El estudiante duerme bien según el uso de redes?</h1>
+
+  <button id="predictBtn">Generar Árbol y Predecir</button>
+
+  <h2>Resultado:</h2>
+  <p id="result"></p>
+
+  <h2>Árbol de Decisión:</h2>
+  <img id="graph" src="" alt="Árbol de decisión generado" style="max-width: 800px; display: none;">
+
+  <script>
+    const button = document.getElementById("predictBtn");
+    const resultEl = document.getElementById("result");
+    const graphImg = document.getElementById("graph");
+
+    button.addEventListener("click", async () => {
+      try {
+        const response = await fetch("http://127.0.0.1:5000/predict/student_sleeps_enough");
+
+        if (!response.ok) throw new Error("Error en la respuesta del servidor");
+
+        const data = await response.json();
+
+        // Muestra el resultado textual
+        resultEl.textContent = data.prediction === 1
+          ? "Predicción: El estudiante duerme bien."
+          : "Predicción: El estudiante no duerme bien.";
+
+        // Muestra el árbol si se genera
+        if (data.plot_base64) {
+          graphImg.src = `data:image/png;base64,${data.plot_base64}`;
+          graphImg.style.display = "block";
+        } else {
+          graphImg.style.display = "none";
+        }
+
+      } catch (error) {
+        resultEl.textContent = "Error al realizar la predicción.";
+        graphImg.style.display = "none";
+        console.error(error);
+      }
+    });
+  </script>
+</body>
+</html>
