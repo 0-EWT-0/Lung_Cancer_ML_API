@@ -1,21 +1,69 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Árbol de Decisión: Redes sociales y su impacto en lo académico</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>¿Las redes sociales te aíslan?</title>
 </head>
-<body>
-  <h1>¿El estudiante es afectado debido a su tiempo en redes sociales?</h1>
 
-  <button id="predictBtn">Generar Árbol y Predecir</button>
+<body class="bg-blue-50 font-sans min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-2xl w-full bg-white rounded-lg shadow-lg p-8 space-y-8">
+        <!-- Title -->
+        <h1 class="text-3xl font-bold text-blue-800 text-center">
+            Predicción: Adicción a Redes Sociales vs. Conflictos
+        </h1>
 
-  <h2>Resultado:</h2>
-  <p id="result"></p>
+        <!-- Input Section -->
+        <div class="flex justify-center">
+            <div class="w-full max-w-md">
+                <label for="addicted_score" class="block text-sm font-medium text-gray-600 text-center">
+                    Nivel de Adicción
+                </label>
+                <div class="mt-2 grid space-y-4 items-center justify-center space-x-4">
+                    <input placeholder="(0-10)" type="number" id="addicted_score" name="addicted_score" step="1" min="0" max="10" required
+                        class="w-128 px-4 py-3 border border-blue-200 rounded-lg shadow-sm text-center text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+                    <button type="submit" form="predictForm"
+                        class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-full transition duration-300 shadow-md">
+                        Predecir
+                    </button>
+                </div>
+            </div>
+        </div>
 
-  <h2>Árbol de Decisión:</h2>
-  <img id="graph" src="" alt="Árbol de decisión generado" style="max-width: 800px; display: none;">
+        <!-- Result Section -->
+        <div class="text-center">
+            <h2 class="text-2xl font-semibold text-blue-700 mb-4">
+                Resultado
+            </h2>
+            <p id="result" class="text-gray-700 text-lg bg-gray-100 rounded-lg p-4">
+                <!-- Result will be displayed here -->
+            </p>
+        </div>
 
-  <script>
+        <!-- Graph Section -->
+        <div class="text-center">
+            <h2 class="text-2xl font-semibold text-blue-700 mb-4">
+                Gráfica
+            </h2>
+            <img id="graph" src="" alt="Gráfica generada" class="max-w-full h-auto mx-auto rounded-lg shadow-md"
+                style="max-width: 600px; display: none;" />
+        </div>
+    </div>
+
+    <!-- Form (kept for functionality but visually integrated) -->
+    <form id="predictForm" class="hidden"></form>
+
+    <script>
     const button = document.getElementById("predictBtn");
     const resultEl = document.getElementById("result");
     const graphImg = document.getElementById("graph");
@@ -49,4 +97,5 @@
     });
   </script>
 </body>
+
 </html>

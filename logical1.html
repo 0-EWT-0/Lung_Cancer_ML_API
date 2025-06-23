@@ -64,29 +64,29 @@
     <form id="predictForm" class="hidden"></form>
 
     <script>
-        const form = document.getElementById("predictForm");
-        const resultEl = document.getElementById("result");
-        const graphImg = document.getElementById("graph");
+    const form = document.getElementById("predictForm");
+    const resultEl = document.getElementById("result");
+    const graphImg = document.getElementById("graph");
 
-        form.addEventListener("submit", async (event) => {
-            event.preventDefault();
-            const addicted_score = parseFloat(document.getElementById("addicted_score").value);
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const addicted_score = parseFloat(document.getElementById("addicted_score").value);
 
-            const response = await fetch("http://127.0.0.1:5000/predict/social_media_addiction_conflicts", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ addicted_score })
-            });
+      const response = await fetch("http://127.0.0.1:5000/predict/social_media_addiction_conflicts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ addicted_score })
+      });
 
-            const data = await response.json();
-            resultEl.textContent = `Tienesgit : ${data.addicted_score} conflictos`;
+      const data = await response.json();
+      resultEl.textContent = `Predicción: ${data.addicted_score} conflictos`;
 
-            if (data.plot_base64) {
-                graphImg.src = `data:image/png;base64,${data.plot_base64}`;
-                graphImg.style.display = "block";
-            }
-        });
-    </script>
+      if (data.plot_base64) {
+        graphImg.src = `data:image/png;base64,${data.plot_base64}`;
+        graphImg.style.display = "block";
+      }
+    });
+  </script>
 </body>
 
 </html>
