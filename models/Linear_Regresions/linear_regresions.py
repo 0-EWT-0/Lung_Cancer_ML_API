@@ -34,6 +34,7 @@ def social_media_addiction_conflicts(addicted_score: float):
     image_base64 = base64.b64encode(buffer.read()).decode('utf-8')
     plt.close()
 
+  
     return {
         "prediction": int(pred[0]),
         "plot": image_base64
