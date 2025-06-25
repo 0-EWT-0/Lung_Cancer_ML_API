@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Predicción de Salud Mental</title>
+</head>
+
+<body class="bg-blue-50 font-sans min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-2xl w-full bg-white rounded-lg shadow-lg p-8 space-y-8">
+        <!-- Title -->
+        <h1 class="text-3xl font-bold text-blue-800 text-center">
+            Predicción: Horas de Sueño vs. Salud Mental
+        </h1>
+
+        <!-- Input Section -->
+        <div class="flex justify-center">
+            <div class="w-full max-w-md">
+                <label for="sleep_hours" class="block text-sm font-medium text-gray-600 text-center">
+                    Horas de sueño diarias
+                </label>
+                <input placeholder="(0-24)" type="number" id="sleep_hours" name="sleep_hours" step="0.1" min="0" max="24" required
+                    class="w-full px-4 py-3 border border-blue-200 rounded-lg shadow-sm text-center text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 mb-4" />
+                
+                <label for="mental_health_score" class="block text-sm font-medium text-gray-600 text-center">
+                    Puntuación de salud mental
+                </label>
+                <input placeholder="(0-10)" type="number" id="mental_health_score" name="mental_health_score" step="0.1" min="0" max="10" required
+                    class="w-full px-4 py-3 border border-blue-200 rounded-lg shadow-sm text-center text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+                
+                <div class="mt-4 flex justify-center">
+                    <button type="submit" form="mentalHealthForm"
+                        class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-full transition duration-300 shadow-md">
+                        Predecir Salud Mental
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Result Section -->
+        <div class="text-center">
+            <h2 class="text-2xl font-semibold text-blue-700 mb-4">
+                Resultado
+            </h2>
+            <p id="mentalHealthResult" class="text-gray-700 text-lg bg-gray-100 rounded-lg p-4">
+                <!-- Result will be displayed here -->
+            </p>
+        </div>
+
+        <!-- Graph Section -->
+        <div class="text-center">
+            <h2 class="text-2xl font-semibold text-blue-700 mb-4">
+                Gráfica
+            </h2>
+            <img id="mentalHealthGraph" src="" alt="Gráfica de Salud Mental" class="max-w-full h-auto mx-auto rounded-lg shadow-md"
+                style="max-width: 600px; display: none;" />
+        </div>
+    </div>
+
+    <!-- Form (kept for functionality but visually integrated) -->
+    <form id="mentalHealthForm" class="hidden"></form>
+
+    <script>
+        const mentalHealthForm = document.getElementById("mentalHealthForm");
+        const mentalHealthResult = document.getElementById("mentalHealthResult");
+        const mentalHealthGraph = document.getElementById("mentalHealthGraph");
+
+        mentalHealthForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            const sleep_hours = parseFloat(document.getElementById("sleep_hours").value);
+            const mental_health_score = parseFloat(document.getElementById("mental_health_score").value);
+
+            const response = await fetch("http://127.0.0.1:5000/predict/Avg_Daily_Usage_Hours", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ sleep_hours, mental_health_score })
+            });
+
+            const data = await response.json();
+            mentalHealthResult.textContent = `Predicción: ${data.addicted_score} impacto en salud mental`;
+
+            if (data.plot_base64) {
+                mentalHealthGraph.src = `data:image/png;base64,${data.plot_base64}`;
+                mentalHealthGraph.style.display = "block";
+            }
+        });
+    </script>
+</body>
+
+</html>
