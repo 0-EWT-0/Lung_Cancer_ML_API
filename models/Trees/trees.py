@@ -2,6 +2,8 @@ from sklearn.tree import plot_tree
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from io import BytesIO
 import base64

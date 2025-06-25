@@ -1,5 +1,7 @@
 from sklearn.linear_model import LogisticRegression
 import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.use('Agg')
 from io import BytesIO
 import base64
 from services.data_context import df

@@ -1,3 +1,5 @@
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 from io import BytesIO
