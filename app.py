@@ -1,5 +1,7 @@
 from flask import Flask
 from flask_cors import CORS
+import os
+
 from services.processing import prepare_dataset
 from controllers.logical_controller import logical_bp
 from controllers.linear_controller import linear_bp
@@ -13,6 +15,7 @@ from controllers.user_controller import data_bp
 app = Flask(__name__)
 CORS(app)
 
+# Registrar los blueprints
 app.register_blueprint(logical_bp)
 app.register_blueprint(linear_bp)
 app.register_blueprint(tree_bp)
@@ -24,7 +27,8 @@ app.register_blueprint(data_bp)
 
 @app.route('/')
 def home():
-    return '¡Flask está funcionando correctamente!'
+    return '¡Flask está funcionando correctamente en Render!'
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
