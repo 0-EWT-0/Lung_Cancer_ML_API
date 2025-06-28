@@ -7,7 +7,7 @@ from services.data_context import df
 
 def sleep_hours_histogram():
     plt.figure(figsize=(10, 6))
-    plt.hist(df['Sleep_Hours_Per_Night'], bins=15, color='mediumseagreen', edgecolor='black')
+    plt.hist(df['sleep_hours_per_night'], bins=15, color='mediumseagreen', edgecolor='black')
     plt.title('Distribución de Horas de Sueño por Noche')
     plt.xlabel('Horas de sueño')
     plt.ylabel('Cantidad de estudiantes')
@@ -26,7 +26,7 @@ def sleep_hours_histogram():
 def daily_usage_hours_histogram():
     
     plt.figure(figsize=(10, 6))
-    plt.hist(df['Avg_Daily_Usage_Hours'], bins=15, color='cornflowerblue', edgecolor='black')
+    plt.hist(df['avg_daily_usage_hours'], bins=15, color='cornflowerblue', edgecolor='black')
     plt.title('Distribución del Uso Diario de Redes Sociales')
     plt.xlabel('Horas por día')
     plt.ylabel('Cantidad de estudiantes')
@@ -44,13 +44,13 @@ def daily_usage_hours_histogram():
     
 def age_histogram(): 
     
-    df['Age'].hist()
+    df['age'].hist()
     plt.title('Distribución de Edad')
     plt.xlabel('Edad')
     plt.ylabel('Frecuencia')
     
     plt.figure(figsize=(10, 6))
-    plt.hist(df['Avg_Daily_Usage_Hours'], bins=15, color='cornflowerblue', edgecolor='black')
+    plt.hist(df['avg_daily_usage_hours'], bins=15, color='cornflowerblue', edgecolor='black')
     plt.title('Distribución del Uso Diario de Redes Sociales')
     plt.xlabel('Horas por día')
     plt.ylabel('Cantidad de estudiantes')

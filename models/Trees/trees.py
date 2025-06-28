@@ -13,9 +13,9 @@ from services.data_context import df
 
 def student_sleeps_enough():
     
-    df["duerme_bien"] = df["Sleep_Hours_Per_Night"].apply(lambda x: 1 if x >= 7 else 0)
+    df["duerme_bien"] = df["sleep_hours_per_night"].apply(lambda x: 1 if x >= 7 else 0)
     
-    X = df[["Avg_Daily_Usage_Hours"]]
+    X = df[["avg_daily_usage_hours"]]
     y = df["duerme_bien"]
     
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5, random_state=50)
@@ -44,8 +44,8 @@ def student_sleeps_enough():
 
 def social_media_impact_academics():
     
-    X = df[['Avg_Daily_Usage_Hours']]
-    y = df['Affects_Academic_Performance']
+    X = df[['avg_daily_usage_hours']]
+    y = df['affects_academic_performance']
     
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5, random_state=42)
     modelo = DecisionTreeClassifier(max_depth=3)
@@ -74,10 +74,10 @@ def social_media_impact_academics():
 
 # def social_media_usage_by_relationship_status():
     
-#     df["muchas_horas"] = df["Avg_Daily_Usage_Hours"].apply(lambda x: 1 if x > 5 else 0)
+#     df["muchas_horas"] = df["avg_daily_usage_hours"].apply(lambda x: 1 if x > 5 else 0)
     
 #     le = LabelEncoder()
-#     df["estado_codificado"] = le.fit_transform(df["Relationship_Status"].astype(str))
+#     df["estado_codificado"] = le.fit_transform(df["relationship_status"].astype(str))
 #     X = df[["estado_codificado"]]
 #     y = df["muchas_horas"]
 #     modelo = DecisionTreeClassifier(max_depth=3)

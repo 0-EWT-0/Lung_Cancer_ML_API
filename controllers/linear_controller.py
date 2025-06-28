@@ -3,7 +3,7 @@ from models.Linear_Regresions.linear_regresions import slepp_hours_affect_mental
 
 linear_bp = Blueprint('linear_bp', __name__)
 
-@linear_bp.route('/predict/Avg_Daily_Usage_Hours', methods=['POST'])
+@linear_bp.route('/predict/avg_daily_usage_hours', methods=['POST'])
 def predict_mental_health():
     data = request.json
     sleep_hours = float(data.get("sleep_hours"))

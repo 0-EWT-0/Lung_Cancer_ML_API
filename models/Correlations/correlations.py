@@ -9,7 +9,7 @@ from services.data_context import df
 # Correlacion Uso de horas diarias, nivel de adicccion, conflictos, horas de sueno
 
 def daily_usage_addiction_conflicts_sleep_correlation():
-    x = df[['Avg_Daily_Usage_Hours', 'Addicted_Score', 'Conflicts_Over_Social_Media', 'Sleep_Hours_Per_Night']].corr()
+    x = df[['avg_daily_usage_hours', 'addicted_score', 'conflicts_over_social_media', 'sleep_hours_per_night']].corr()
     sns.heatmap(x, annot=True)
     
     buffer = BytesIO()

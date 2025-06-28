@@ -10,13 +10,13 @@ def predict_user_results(sleep_hours: float, avg_usage: float):
     results = {}
 
     # Adicción
-    X1 = df[['Sleep_Hours_Per_Night', 'Avg_Daily_Usage_Hours']]
-    y1 = df['Addicted_Score']
+    X1 = df[['sleep_hours_per_night', 'avg_daily_usage_hours']]
+    y1 = df['addicted_score']
     model1 = LinearRegression().fit(X1, y1)
     addicted_score = model1.predict([[sleep_hours, avg_usage]])[0]
 
     plt.figure()
-    plt.scatter(df['Sleep_Hours_Per_Night'], y1)
+    plt.scatter(df['sleep_hours_per_night'], y1)
     plt.axhline(addicted_score, color="red", linestyle="--", label=f"Tu nivel: {addicted_score:.1f}")
     plt.title("Tu nivel de adicción a redes")
     plt.xlabel("Sueño")
@@ -26,13 +26,13 @@ def predict_user_results(sleep_hours: float, avg_usage: float):
     plt.close()
 
     # Rendimiento académico
-    X2 = df[['Addicted_Score', 'Avg_Daily_Usage_Hours']]
-    y2 = df['Affects_Academic_Performance']
+    X2 = df[['addicted_score', 'avg_daily_usage_hours']]
+    y2 = df['affects_academic_performance']
     model2 = LogisticRegression().fit(X2, y2)
     affects_academic = model2.predict([[addicted_score, avg_usage]])[0]
 
     plt.figure()
-    plt.scatter(df['Addicted_Score'], y2)
+    plt.scatter(df['addicted_score'], y2)
     plt.axvline(addicted_score, color="blue", linestyle="--", label="Tu nivel")
     plt.title("¿Afecta tu rendimiento académico?")
     plt.xlabel("Adicción")
@@ -42,13 +42,13 @@ def predict_user_results(sleep_hours: float, avg_usage: float):
     plt.close()
 
     # Salud mental
-    X3 = df[['Sleep_Hours_Per_Night', 'Addicted_Score']]
-    y3 = df['Mental_Health_Score']
+    X3 = df[['sleep_hours_per_night', 'addicted_score']]
+    y3 = df['mental_health_score']
     model3 = LinearRegression().fit(X3, y3)
     mental_health = model3.predict([[sleep_hours, addicted_score]])[0]
 
     plt.figure()
-    plt.scatter(df['Sleep_Hours_Per_Night'], y3)
+    plt.scatter(df['sleep_hours_per_night'], y3)
     plt.axhline(mental_health, color="green", linestyle="--", label=f"Tu salud mental: {mental_health:.1f}")
     plt.title("Salud mental estimada")
     plt.xlabel("Sueño")

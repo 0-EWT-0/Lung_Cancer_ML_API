@@ -9,14 +9,14 @@ from services.data_context import df
 
 def daily_hours_addicted_age_relation ():
     
-    X_cluster = df[['Addicted_Score', 'Avg_Daily_Usage_Hours', 'Age']]
+    X_cluster = df[['addicted_score', 'avg_daily_usage_hours', 'age']]
     
     kmeans_model = KMeans(n_clusters=3, random_state=42)
     df['grupo'] = kmeans_model.fit_predict(X_cluster)
     
-    x = df['Addicted_Score']
-    y = df['Avg_Daily_Usage_Hours']
-    z = df['Age']
+    x = df['addicted_score']
+    y = df['avg_daily_usage_hours']
+    z = df['age']
     c = df['grupo']
 
     fig = plt.figure(figsize=(10, 7))

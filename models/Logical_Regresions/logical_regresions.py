@@ -9,8 +9,8 @@ from services.data_context import df
 # Prediccion Logica para saber si las personas que pasan pmas tiempo en redes sociales estan solas
 
 def single_more_hours_social_media(hours: float):
-    X = df[["Avg_Daily_Usage_Hours"]]
-    y = df["Relationship_Status_Single"]
+    X = df[["avg_daily_usage_hours"]]
+    y = df["relationship_status_Single"]
 
     model = LogisticRegression()
     model.fit(X, y)
@@ -41,8 +41,8 @@ def single_more_hours_social_media(hours: float):
 
 def relations_affect_academy_preformance (is_in_relationship: bool):
     
-    X = df[["Relationship_Status_In Relationship"]]
-    y = df["Affects_Academic_Performance"]
+    X = df[["relationship_status_In Relationship"]]
+    y = df["affects_academic_performance"]
 
     model = LogisticRegression()
     model.fit(X, y)
@@ -73,8 +73,8 @@ def relations_affect_academy_preformance (is_in_relationship: bool):
 
 def less_sleep_in_complicated_relationship(sleep_hours: float):
     
-    X = df[["Sleep_Hours_Per_Night"]]
-    y = df["Relationship_Status_Complicated"]
+    X = df[["sleep_hours_per_night"]]
+    y = df["relationship_status_Complicated"]
 
     model = LogisticRegression()
     model.fit(X, y)

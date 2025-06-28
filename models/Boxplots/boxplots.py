@@ -9,12 +9,12 @@ import pandas as pd
 # Boxplot de salud mental por nivel de uso
 
 def mental_health_by_usage_boxplot():
-    df['Categoria_Uso'] = pd.cut(df['Avg_Daily_Usage_Hours'],
+    df['Categoria_Uso'] = pd.cut(df['avg_daily_usage_hours'],
     bins=[0, 2, 4, 6, 24],
     labels=['Bajo', 'Moderado', 'Alto', 'Excesivo'])
     
     plt.figure(figsize=(10, 6))
-    df.boxplot(column='Mental_Health_Score', by='Categoria_Uso', grid=False)
+    df.boxplot(column='mental_health_score', by='Categoria_Uso', grid=False)
     plt.title('Salud mental según nivel de uso de redes sociales')
     plt.suptitle('')
     plt.xlabel('Nivel de uso de redes')
@@ -37,7 +37,7 @@ def mental_health_by_usage_boxplot():
 def usage_by_relationship_status_boxplot():
     
     plt.figure(figsize=(10, 6))
-    df.boxplot(column='Avg_Daily_Usage_Hours', by='Relationship_Status_Single', grid=False)
+    df.boxplot(column='avg_daily_usage_hours', by='relationship_status_Single', grid=False)
     plt.title('Uso diario de redes sociales según estado sentimental solo')
     plt.suptitle('')
     plt.xlabel('Estado sentimental')

@@ -1,22 +1,17 @@
 import pandas as pd
-import mysql.connector
+import psycopg2
+from config import DB_CONFIG
 
 def prepare_dataset():
-    conn = mysql.connector.connect(
-        host="127.0.0.1",
-        user="admin",
-        password="123",
-        database="datasetDB"
-    )
-
-    query = "SELECT * FROM local_dataset;" 
+    conn = psycopg2.connect(**DB_CONFIG)
+    query = "SELECT * FROM prod_dataset;" 
     
     df = pd.read_sql(query, conn)
+    print(df.head())
 
-    # df['Affects_Academic_Performance'] = df['Affects_Academic_Performance'].apply(lambda x: 1 if x == "Yes" else 0)
+    # df['affects_academic_performance'] = df['affects_academic_performance'].apply(lambda x: 1 if x == "Yes" else 0)
 
-    df = pd.get_dummies(df, columns=['Relationship_Status', 'Gender'], drop_first=False)
+    df = pd.get_dummies(df, columns=['relationship_status', 'gender'], drop_first=False)
 
     conn.close()
-
     return df

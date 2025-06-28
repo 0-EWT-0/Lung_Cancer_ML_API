@@ -12,8 +12,8 @@ from services.data_context import df
 
 def social_media_addiction_conflicts(addicted_score: float):
     
-    X = df[["Addicted_Score"]]
-    y = df["Conflicts_Over_Social_Media"]
+    X = df[["addicted_score"]]
+    y = df["conflicts_over_social_media"]
 
     model = LinearRegression()
     model.fit(X, y)
@@ -44,8 +44,8 @@ def social_media_addiction_conflicts(addicted_score: float):
 
 def slepp_hours_affect_mental_health (sleep_hours: float, mental_health_score: float):
     
-    X = df[['Sleep_Hours_Per_Night','Mental_Health_Score']]
-    y = df['Avg_Daily_Usage_Hours']
+    X = df[['sleep_hours_per_night','mental_health_score']]
+    y = df['avg_daily_usage_hours']
 
     model = LinearRegression();
     model.fit(X,y);
@@ -56,9 +56,9 @@ def slepp_hours_affect_mental_health (sleep_hours: float, mental_health_score: f
     fig = plt.figure(figsize=(10, 7))
     ax = fig.add_subplot(111, projection='3d')
 
-    x = df['Sleep_Hours_Per_Night']
-    y = df['Mental_Health_Score']
-    z = df['Avg_Daily_Usage_Hours']
+    x = df['sleep_hours_per_night']
+    y = df['mental_health_score']
+    z = df['avg_daily_usage_hours']
 
     scatter = ax.scatter(x, y, z, c=z, cmap='viridis', alpha=0.8)
 
@@ -93,8 +93,8 @@ def slepp_hours_affect_mental_health (sleep_hours: float, mental_health_score: f
 
 def less_sleep_more_social_media(media_hours: float):
     
-    X = df[['Avg_Daily_Usage_Hours']]
-    y = df['Sleep_Hours_Per_Night']
+    X = df[['avg_daily_usage_hours']]
+    y = df['sleep_hours_per_night']
     
     model = LinearRegression();
     model.fit(X,y);
