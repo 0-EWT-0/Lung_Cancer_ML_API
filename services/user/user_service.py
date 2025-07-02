@@ -6,7 +6,7 @@ def insert_user_data(data):
     cursor = conn.cursor()
 
     query = """
-        INSERT INTO prod_dataset (
+        INSERT INTO this_dataset (
             age, gender, academic_level, country, avg_daily_usage_hours,
             most_used_platform, sleep_hours_per_night, relationship_status,
             conflicts_over_social_media,

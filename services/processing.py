@@ -4,9 +4,10 @@ from config import DB_CONFIG
 
 def prepare_dataset():
     conn = psycopg2.connect(**DB_CONFIG)
-    query = "SELECT * FROM prod_dataset;" 
+    query = "SELECT * FROM this_dataset;" 
     
     df = pd.read_sql(query, conn)
+    
     print(df.head())
 
     # df['affects_academic_performance'] = df['affects_academic_performance'].apply(lambda x: 1 if x == "Yes" else 0)
