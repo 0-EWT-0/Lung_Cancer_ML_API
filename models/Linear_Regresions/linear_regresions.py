@@ -120,3 +120,34 @@ def less_sleep_more_social_media(media_hours: float):
         "prediction": int(pred[0]),
         "plot": image_base64
     }
+
+def social_media_mental_health(avg_daily_usage_hours: float):
+    X = df[["avg_daily_usage_hours"]]
+    y = df["mental_health_score"]
+
+    model = LinearRegression()
+    model.fit(X, y)
+
+    pred = model.predict([[avg_daily_usage_hours]])[0]
+
+    plt.figure(figsize=(10, 6))
+    plt.scatter(X, y, color='blue', alpha=0.5, label='Datos reales')
+    plt.plot(X, model.predict(X), color='red', linewidth=2, label='Línea de regresión')
+    plt.scatter([avg_daily_usage_hours], [pred], color='green', s=100, marker='*', label=f'Predicción: {pred:.2f}')
+    plt.xlabel('Horas de Uso Diario de Redes Sociales', fontsize=12)
+    plt.ylabel('Puntaje de Salud Mental', fontsize=12)
+    plt.title('¿Más uso de redes sociales reduce la salud mental?', fontsize=14)
+    plt.legend(fontsize=10)
+    plt.grid(True, linestyle='--', alpha=0.7)
+
+    buffer = BytesIO()
+    plt.savefig(buffer, format='png', dpi=100)
+    buffer.seek(0)
+    image_base64 = base64.b64encode(buffer.read()).decode('utf-8')
+    plt.close()
+
+    return {
+        "prediction": round(pred, 2),
+        "plot": image_base64,
+        "coefficient": round(model.coef_[0], 2)
+    }
