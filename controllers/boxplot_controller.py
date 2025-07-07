@@ -7,13 +7,15 @@ boxplot_bp = Blueprint('boxplot_bp', __name__)
 def predict_mental_health_by_usage_boxplot():
     result = mental_health_by_usage_boxplot()
     return jsonify({
-        "plot_base64": result["plot"]
+        "plot_base64": result["plot"],
+        "data_points": result["data"]
     })
-    
+
 @boxplot_bp.route('/predict/usage_by_relationship_status_boxplot', methods=['GET'])
 def predict_usage_by_relationship_status_boxplot():
     result = usage_by_relationship_status_boxplot()
     return jsonify({
-        "plot_base64": result["plot"]
+        "plot_base64": result["plot"],
+        "data_points": result["data"]
     })
-    
+

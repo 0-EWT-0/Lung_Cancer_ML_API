@@ -8,16 +8,19 @@ def predict_student_sleeps_enough():
     result = student_sleeps_enough()
     return jsonify({
         "prediction": result["prediction"],
-        "plot_base64": result["plot"]
+        "plot_base64": result["plot"],
+        "data_points": result["data"]
     })
-    
+
 @tree_bp.route('/predict/social_media_impact_academics', methods=['GET'])
 def predict_social_media_impact_academics():
     result = social_media_impact_academics()
     return jsonify({
         "prediction": result["prediction"],
-        "plot_base64": result["plot"]
+        "plot_base64": result["plot"],
+        "data_points": result["data"]
     })
+
     
 # @tree_bp.route('/predict/social_media_usage_by_relationship_status', methods=['GET'])
 # def predict_social_media_usage_by_relationship_status():
