@@ -7,6 +7,8 @@ cluster_bp = Blueprint('cluster_bp', __name__)
 def predict_daily_hours_addicted_age_relation():
     result = daily_hours_addicted_age_relation()
     return jsonify({
-        "plot_base64": result["plot"]
+        "plot_base64": result["plot"],
+        "data_points": result["data"]  # Aquí van todos los datos para graficar en el front
     })
+
     
