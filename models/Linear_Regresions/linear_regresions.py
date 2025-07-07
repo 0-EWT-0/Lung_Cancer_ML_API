@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from io import BytesIO
 import base64
 from services.data_context import df
-
+import pandas as pd  # Importar pandas como pd
 
 
 # Prediccion Linear para saber si mientras mas adicto a las redes sociales, mas conflictos dentro de ellas tienes
@@ -119,4 +119,47 @@ def less_sleep_more_social_media(media_hours: float):
     return {
         "prediction": int(pred[0]),
         "plot": image_base64
+    }
+
+# Predicción lineal para evaluar si las redes sociales aíslan (impacto en salud mental y conflictos)
+def social_media_mental_health(avg_daily_usage_hours: float, addicted_score: float):
+    # Preparar datos para salud mental
+    X_mental = df[['avg_daily_usage_hours', 'addicted_score']]
+    y_mental = df['mental_health_score']
+
+    model_mental = LinearRegression()
+    model_mental.fit(X_mental, y_mental)
+
+    pred_mental = model_mental.predict([[avg_daily_usage_hours, addicted_score]])
+
+    # Preparar datos para conflictos
+    X_conflicts = df[['avg_daily_usage_hours', 'addicted_score']]
+    y_conflicts = df['conflicts_over_social_media']
+
+    model_conflicts = LinearRegression()
+    model_conflicts.fit(X_conflicts, y_conflicts)
+
+    pred_conflicts = model_conflicts.predict([[avg_daily_usage_hours, addicted_score]])
+
+    # Graficar relación con salud mental
+    plt.figure(figsize=(10, 6))
+    plt.scatter(X_mental['avg_daily_usage_hours'], y_mental, label='Datos reales (Salud Mental)')
+    plt.plot(X_mental['avg_daily_usage_hours'], model_mental.predict(X_mental), color='red', label='Regresión')
+    plt.xlabel('Horas de uso diario')
+    plt.ylabel('Puntaje de salud mental')
+    plt.title('Impacto del uso de redes en la salud mental')
+    plt.legend()
+
+    buffer = BytesIO()
+    plt.savefig(buffer, format='png')
+    buffer.seek(0)
+    image_base64 = base64.b64encode(buffer.read()).decode('utf-8')
+    plt.close()
+
+    return {
+        "prediction_mental_health": int(pred_mental[0]),
+        "prediction_conflicts": int(pred_conflicts[0]),
+        "plot_base64": image_base64,
+        "coefficient_mental": float(model_mental.coef_[0]),  # Coeficiente para avg_daily_usage_hours
+        "coefficient_conflicts": float(model_conflicts.coef_[0])  # Coeficiente para avg_daily_usage_hours en conflictos
     }
