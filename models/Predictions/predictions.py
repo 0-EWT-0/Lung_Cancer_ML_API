@@ -84,7 +84,9 @@ def predict_survival(smoking_status: int, family_history: int, bmi: float, chole
         (df["gender"] == gender) &
         (df["smoking_status"] == smoking_status)
     )
-    if country:  # Solo filtrar por país si se proporciona
+
+    # ✅ Solo aplicar filtro de país si existe en el dataset
+    if country and country in df["country"].values:
         filter_mask &= (df["country"] == country)
 
     # Limitar resultados para mejorar rendimiento
